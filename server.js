@@ -1,27 +1,11 @@
 // Express
 const express = require('express');
 const app = express();
-const session = require('express-session');
 
 //ENV file
 require('dotenv').config();
 // Mongoose / DB
 require('./config/db');
-
-// Express session middleware
-app.use(
-	session({
-		secret: 'secret',
-		resave: true,
-		saveUninitialized: true,
-	})
-);
-
-// Passport middleware
-const passport = require('passport');
-require('./config/passport')(passport);
-app.use(passport.initialize());
-app.use(passport.session());
 
 // middlewares
 app.use(express.json());

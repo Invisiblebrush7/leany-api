@@ -12,3 +12,4 @@ module.exports = {
 		return next();
 	},
 };
+// TODO: Change this from redirects to a more API way.
