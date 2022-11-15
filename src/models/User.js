@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
 		required: true,
 		max: 255,
 	},
+	records: {
+		type: Array,
+		default: [],
+	},
 });
 
 module.exports = mongoose.model('User', userSchema);
