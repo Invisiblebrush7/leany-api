@@ -14,6 +14,7 @@ class UsersController {
 	// --------------------------------
 	// TODO: Logout
 	static async logout(req, res) {
+		req.session.destroy();
 		return res.status(200).send('Logout route');
 	}
 
@@ -31,7 +32,10 @@ class UsersController {
 					return res.status(500).send('Something went wrong :(');
 				} else if (match) {
 					console.log('Login Succesful :)');
-					return res.status(200).json({ token: UsersController.generateToken(user) });
+					const jwtToken = UsersController.generateToken(user);
+					req.session.user = user;
+					req.session.jwt = jwtToken;
+					return res.status(200).json({ jwtToken });
 				} else {
 					return res.status(401).send('Invalid email or password');
 				}
